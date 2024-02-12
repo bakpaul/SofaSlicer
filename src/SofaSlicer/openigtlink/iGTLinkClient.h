@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include <igtl/igtlOSUtil.h>
-#include <igtl/igtlPointMessage.h>
+#include <igtlOSUtil.h>
+#include <igtlPointMessage.h>
 #include <SofaSlicer/openigtlink/iGTLinkBase.h>
 
 using namespace sofa::core::objectmodel;

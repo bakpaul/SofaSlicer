@@ -43,7 +43,7 @@
 <!--    <CollisionResponse name="ContactManager" response="FrictionContactConstraint" responseParams="mu=0.5" />-->
 <!--    <NewProximityIntersection name="Intersection" alarmDistance="0.2" contactDistance="0.02" />-->
 
-    <iGTLinkServer name="iGTLServerSender" sender="true" port="18945"/>
+    <iGTLinkClient name="iGTLClient" sender="true" hostname="127.0.0.1" port=18944 />
 
 
     <Node name="Mesh" >
@@ -57,7 +57,7 @@
         <MechanicalObject name="mstate" template="Vec3f" />
         <ParallelTetrahedronFEMForceField name="FEM"  youngModulus="1.5" poissonRatio="0.45" method="large" />
 <!--        <ConstantForceField totalForce="0 0 -2.5" />-->
-        <iGTLinkMessage name="right-long-mesh-low" iGTLink="@../iGTLServerSender"  template="PolyDataDouble" data="@mstate.position"/>
+        <iGTLinkMessage name="SOFAMesh" iGTLink="@../iGTLClient"  template="PolyDataDouble" data="@mstate.position"/>
 
         <BoxROI template="Vec3" box="0 170 0 -48 80 -300   0 220 0 -30 170 -300" drawBoxes="1" position="@mstate.rest_position" name="FixedROI" computeTriangles="0" computeTetrahedra="0" computeEdges="0" />
         <FixedProjectiveConstraint template="Vec3" name="default6" indices="@FixedROI.indices" />

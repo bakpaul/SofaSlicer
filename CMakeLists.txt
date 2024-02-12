@@ -3,13 +3,14 @@ project(SofaSlicer)
 set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-Wall -Wextra -Wpedantic)
 
-
 # SOFA packages containing our dependencies
 find_package(Sofa.Framework REQUIRED) # Needed to use SofaCore, SofaHelper and SofaDefaultType
 find_package(Sofa.Component.Topology REQUIRED) # Needed to use SofaCore, SofaHelper and SofaDefaultType
 find_package(Sofa.Component.StateContainer REQUIRED) # Needed to use SofaCore, SofaHelper and SofaDefaultType
 find_package(OpenIGTLink REQUIRED) # Needed to use SofaCore, SofaHelper and SofaDefaultType
+include(${OpenIGTLink_USE_FILE})
 find_package(Threads REQUIRED)
+
 #if(NOT OpenIGTLink_FOUND )
 #        message("SofaSlicer: DEPENDENCY OpenIGTLink NOT FOUND, OpenIGTLink cxxopt...")
 #
@@ -30,7 +31,6 @@ find_package(Threads REQUIRED)
 #                add_subdirectory(${OpenIGTLink_SOURCE_DIR} ${OpenIGTLink_BINARY_DIR})
 #        endif()
 #endif()
-
 
 set(CONFIG_FILES
         src/SofaSlicer/initSofaSlicer.cpp
@@ -53,7 +53,7 @@ file(GLOB_RECURSE SOURCE_FILES
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} Sofa.Framework Sofa.Component.Topology Sofa.Component.StateContainer OpenIGTLink Threads::Threads)
 ### Dependencies
-include_directories(src)
+include_directories(src ${OpenIGTLink_INCLUDE_DIRS})
 
 
 install(TARGETS
